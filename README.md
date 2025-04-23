@@ -6,7 +6,7 @@ The code implement KMeans using (1) python lists, (2) numpy, and (3) torch. The 
 _Note: Everything runs on CPU here!_
 
 Here is how you can run the script:
-`python3 `
+`python3 kmeans.py`
 
 And here is a sample output:
 ```
@@ -35,3 +35,5 @@ Itt: 4 -- average distance: 0.7214399561285972
 Itt: 5 -- average distance: 0.7192774611711502
 Itt: 6 -- average distance: 0.7188732054829597
 ```
+
+As you can see all the outputs match which mean (in a very unscientific way) that our implementation is correct! 
