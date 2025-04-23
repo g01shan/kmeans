@@ -1,6 +1,7 @@
 """Implements KMeans using lists, numpy, and torch."""
 
 import sys
+import argparse
 from collections import defaultdict
 from typing import Tuple, List
 import numpy as np
@@ -139,21 +140,21 @@ def find_new_clusters_with_torch(
     return mapping, mean_dist, change
 
 
-def kmeans(data, mapping):
+def kmeans(data, mapping, num_clusters):
     """Run the main kmeans loop"""
     itt = 0
     change = True
     while itt < 20 and change:
         if isinstance(data, list):
-            centers = compute_cluster_centers(data, mapping, 3)
+            centers = compute_cluster_centers(data, mapping, num_clusters)
             mapping, mean_dist, change = find_new_clusters(data, centers, mapping)
         elif isinstance(data, np.ndarray):
-            centers = compute_cluster_centers_with_numpy(data, mapping, 3)
+            centers = compute_cluster_centers_with_numpy(data, mapping, num_clusters)
             mapping, mean_dist, change = find_new_clusters_with_numpy(
                 data, centers, mapping
             )
         else:
-            centers = compute_cluster_centers_with_torch(data, mapping, 3)
+            centers = compute_cluster_centers_with_torch(data, mapping, num_clusters)
             mapping, mean_dist, change = find_new_clusters_with_torch(
                 data, centers, mapping
             )
@@ -161,19 +162,45 @@ def kmeans(data, mapping):
         itt += 1
 
 
+def get_cli_arguments():
+    """Parses the command line arguments."""
+    parser = argparse.ArgumentParser(description="A simple KMeans implementation.")
+    parser.add_argument(
+        "-n",
+        "--num_data",
+        type=int,
+        default=100,
+        help="The number of datapoints to cluster.",
+    )
+    parser.add_argument(
+        "-d",
+        "--dim",
+        type=int,
+        default=10,
+        help="The size of vectors representing each datapoint.",
+    )
+    parser.add_argument(
+        "-c", "--num_clusters", default=3, type=int, help="Number of clusters."
+    )
+    args = parser.parse_args()
+    return args
+
+
 def main():
     """The main function."""
+    args = get_cli_arguments()
     # create the problem
-    data, np_data, torch_data = create_problem(100, 10)
+    data, np_data, torch_data = create_problem(args.num_data, args.dim)
     # initializing the kmeans loop
-    mapping = init_clusters(len(data), 3)
+    mapping = init_clusters(len(data), args.num_clusters)
     # the main loop
-    print ('== Solving with basic python')
-    kmeans(data, mapping)
-    print ('== Solving with numpy')
-    kmeans(np_data, mapping)
-    print ('== Solving with torch')
-    kmeans(torch_data, mapping)
+    print("== Solving with basic python")
+    kmeans(data, mapping, args.num_clusters)
+    print("== Solving with numpy")
+    kmeans(np_data, mapping, args.num_clusters)
+    print("== Solving with torch")
+    kmeans(torch_data, mapping, args.num_clusters)
+
 
 if __name__ == "__main__":
     main()

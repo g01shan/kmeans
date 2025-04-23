@@ -6,7 +6,7 @@ The code implement KMeans using (1) python lists, (2) numpy, and (3) torch. The 
 _Note: Everything runs on CPU here!_
 
 Here is how you can run the script:
-`python3 kmeans.py`
+`python3 kmeans.py -n 100 -d 10 -k 3`
 
 And here is a sample output:
 ```
