@@ -1,14 +1,19 @@
-# Can I KMeans? 
+# Can I KMeans? 🤔
 
-Ok, this is nothing fancy! It's just for practice.
-The code implement KMeans using (1) python lists, (2) numpy, and (3) torch. The goal is simply to remember the useful functions from torch and numpy. Also, I hear this is often an interview question.
+### Problem Definition
+Ok, this is nothing fancy! It's just practice.
+We are going to generate datapoints randomly and cluster them.
+The code implement KMeans using (1) python lists, (2) numpy, and (3) torch.
+The goal is simply to remember the useful functions from torch and numpy. Also, I hear this is often an interview question.
 
-_Note: Everything runs on CPU here!_
+_Note: Everything runs on CPU here! We are GPU poor!_
 
-Here is how you can run the script:
+### How to run this?
+It's simple! Something like this (100 datapoints, 10 dimension each, and 3 clusters):
 `python3 kmeans.py -n 100 -d 10 -k 3`
 
-And here is a sample output:
+### I can KMean! ✅
+Ok, here is a sample output:
 ```
 == Solving with basic python
 Itt: 0 -- average distance: 0.8020002010509966
@@ -36,4 +41,10 @@ Itt: 5 -- average distance: 0.7192774611711502
 Itt: 6 -- average distance: 0.7188732054829597
 ```
 
-As you can see all the outputs match which mean (in a very unscientific way) that our implementation is correct! 
+As you can see, all the outputs match which means (in a very unscientific way) that our implementation is correct! 
+
+### Anything else?
+
+- Psst! Once in a while, the basic python solution diverges from the other two 😱! Not sure why, I need to look into it.
+- Argparse is cool!
+- Use `isinstance(x, str)` instead of `type(x) is str`.
