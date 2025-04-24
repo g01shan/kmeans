@@ -43,7 +43,7 @@ Itt: 6 -- average distance: 0.7188732054829597
 
 As you can see, all the outputs match which means (in a very unscientific way) that our implementation is correct! 
 
-### Anything else?
+### Anything else? Any learnings?
 
 - Psst! Once in a while, the basic python solution diverges from the other two 😱! Not sure why, I need to look into it.
 - Argparse is cool!
